@@ -6,7 +6,6 @@ import leetcode
 from leetcode.api_client import ApiClient
 from leetcode.configuration import Configuration
 from dotenv import load_dotenv
-
 # Load environment variables from .env file
 load_dotenv()
 
@@ -91,6 +90,7 @@ def initialize_questions():
             })
 
 def main():
+    
     # Initialize questions once
     initialize_questions()
     # Check if difficulty is provided as command-line argument
