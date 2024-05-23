@@ -1,11 +1,12 @@
+# get_leetcode_questions.py
 import os
-import re
 import random
 import sys
 import leetcode
 from leetcode.api_client import ApiClient
 from leetcode.configuration import Configuration
 from dotenv import load_dotenv
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -83,10 +84,12 @@ def initialize_questions():
             question_title = pair.stat.question__title
             question_slug = pair.stat.question__title_slug
             question_url = f"https://leetcode.com/problems/{question_slug}"
+            question_status = "Unsolved" if pair.status != "ac" else "Solved"
             stored_questions[difficulty].append({
                 'question_name': question_title,
                 'difficulty': difficulty,
-                'question_url': question_url
+                'question_url': question_url,
+                'status': question_status
             })
 
 def main():
@@ -103,7 +106,8 @@ def main():
         for question in stored_questions[difficulty]:
             print(f"Difficulty: {difficulty.capitalize()}")
             print(f"Question: {question['question_name']}")
-            print(f"URL: {question['question_url']}\n")
+            print(f"URL: {question['question_url']}")
+            print(f"Status: {question['status']}\n")
     else:
         print(f"No questions available for difficulty: {difficulty}")
 
